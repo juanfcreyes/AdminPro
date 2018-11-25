@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarService, UsuarioService } from '../../services/service.index'
+import { Usuario } from '../../models/usuario.model';
 
 @Component({
-  selector: 'app-siderbar',
-  templateUrl: './siderbar.component.html',
-  styles: []
+	selector: 'app-siderbar',
+	templateUrl: './siderbar.component.html',
+	styles: []
 })
 export class SiderbarComponent implements OnInit {
 
-  constructor(private siderbarService: SidebarService, private usuarioService: UsuarioService) { }
+	usuario: Usuario;
 
-  ngOnInit() {
-  }
+	constructor(private siderbarService: SidebarService,
+		private usuarioService: UsuarioService) { }
 
-  logout() {
+	ngOnInit() {
+		this.usuario = this.usuarioService.getUsuario();
+	}
+
+	logout() {
 		this.usuarioService.logout();
 	}
 

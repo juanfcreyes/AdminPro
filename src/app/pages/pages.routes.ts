@@ -6,6 +6,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
+
 import { LoginGuard } from '../services/guards/login.guard';
 
 const ROUTES: Routes = [
@@ -19,7 +21,8 @@ const ROUTES: Routes = [
       { path:'rxjs', component: RxjsComponent, data: { titulo: 'RxJs'}  }, 
       { path:'progress', component: ProgressComponent, data: { titulo: 'Progress'}  }, 
       { path:'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard'}  }, 
-      { path:'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajuste de Tema'}  }, 
+      { path:'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajuste de tema'}  }, 
+      { path:'profile', component: ProfileComponent, data: { titulo: 'Perfil de usuario'}  }, 
       { path:'', redirectTo: '/dashboard' , pathMatch: 'full' }, 
     ]
   } 
