@@ -45,7 +45,7 @@
                     <img [src]="imagenTemp" class="w150">
                 </div>
                 <div class="row justify-content-center">
-                    <input (change)="selecionarImagen($event.target.files[0])" type="file"/> 
+                    <input class="form-control" (change)="selecionarImagen($event.target.files[0])" type="file"/> 
                 </div>
                 <button (click)="cambiarImagen()" [disabled]="!imagen" type="button" class="btn btn-block btn-success waves-effect waves-light m-r-10">
                     <i class="fa fa-save"></i>  Actualizar Foto

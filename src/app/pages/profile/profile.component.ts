@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/service.index';
 import { Usuario } from 'src/app/models/usuario.model';
+import { ImagenService } from 'src/app/utilitario/utilitario.index';
 
 @Component({
 	selector: 'app-profile',
@@ -13,7 +14,8 @@ export class ProfileComponent implements OnInit {
 	private usuario: Usuario;
 	private imagen: File ;
 
-	constructor(private usuarioService: UsuarioService) {
+	constructor(private usuarioService: UsuarioService,
+		private imagenService: ImagenService) {
 		this.usuario = this.usuarioService.getUsuario();
 	}
 
@@ -25,30 +27,16 @@ export class ProfileComponent implements OnInit {
 		if(!this.usuario.google) {
 			this.usuario.email = usuario.email;
 		}
-		this.usuarioService.actualizarUsuario(this.usuario)
-		.subscribe(() => {
-			swal('Usuario actualizado', usuario.nombre, 'success');
-		})
+		this.usuarioService.actualizarUsuario(this.usuario).subscribe();
 		
 	}
 
 	selecionarImagen(archivo: File) {
-		if(!archivo) {
-			this.imagen = undefined;
-			return;
-		}
-
-		if(archivo.type.indexOf('image') < 0) {
-			this.imagen = undefined;
-			swal('Solo Imagenes', 'El archivo seleccioando no es una imagen', 'error');
-			return;
-		}
-		this.imagen = archivo;
-		const reader = new FileReader();
-		reader.readAsDataURL(archivo);
-		reader.onload = () => {
-			this.imagenTemp = reader.result.toString();
-		};
+		this.imagen = this.imagenService.selecionarImagen(archivo);
+		this.imagenService.crearImagenTemporal(archivo)
+		.then( res => {
+			this.imagenTemp = res;
+		});;
 	}
 
 	cambiarImagen() {

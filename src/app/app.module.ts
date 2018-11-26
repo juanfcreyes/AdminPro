@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
 import { ServiceModule } from './services/service.module';
-
+import { UtilitarioModule } from './utilitario/utilitario.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { ServiceModule } from './services/service.module';
   imports: [
     BrowserModule,
     ServiceModule,
+    UtilitarioModule,
     PagesModule,
     FormsModule,
     ReactiveFormsModule,

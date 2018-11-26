@@ -17,7 +17,7 @@ export class UsuarioService {
 	private usuario: Usuario = null;
 	private token: string = ''; 
 
-	constructor(public http: HttpClient, private router: Router, 
+	constructor(private http: HttpClient, private router: Router, 
 		private subirArchivoService: SubirArchivoService) {	
 		this.cargarStorage();
 	}
@@ -119,13 +119,21 @@ export class UsuarioService {
 	public actualizarUsuario(usuario: Usuario) {
 		const url = `${URL_SERVICIOS}/usuario/${usuario._id}?token=${this.token}`;
 		return this.http.put(url, usuario).pipe(map((res: any) => {
-			const {usuario} = res;
-			this.guardarStorage(usuario._id, this.token, usuario);
+			if (usuario._id === this.usuario._id) {
+				const {usuarioDb} = res;
+				this.guardarStorage(usuarioDb._id, this.token, usuario);
+			}
+			swal('Usuario actualizado', usuario.nombre, 'success');
 			return true;
 		}));
 	}
 
-	cambiarImagen(archivo: File, id: string) {
+	/**
+	 * Servicio para actualizar la imagen de un usuario
+	 * @param archivo 
+	 * @param id 
+	 */
+	public cambiarImagen(archivo: File, id: string) {
 		this.subirArchivoService.subirArchivo(archivo, 'usuarios', id)
 		.then( (res: any) => {
 			this.usuario.img = res.img;
@@ -134,6 +142,33 @@ export class UsuarioService {
 		}).catch((res) => {
 			
 		});
+	}
+
+	/**
+	 * Servicio para cargar una lista de usuario por paginacion
+	 * @param desde 
+	 */
+	public cargarUsuarios(desde: number = 0) {
+		const url = `${URL_SERVICIOS}/usuario?desde=${desde}`;
+		return this.http.get(url);
+	}
+
+	/**
+	 * Servicio para buscar usaurio mediante un termino de busqueda
+	 * @param termino 
+	 */
+	public buscarUsuarios(termino: string) {
+		const url = `${URL_SERVICIOS}/busqueda/coleccion/usuarios/${termino}`;
+		return this.http.get(url);
+	}
+
+	/**
+	 * Servicio para borrar un usuario del sistema
+	 * @param id 
+	 */
+	public borrarUsuario(id: string) {
+		const url = `${URL_SERVICIOS}/usuario/${id}?token=${this.token}`;
+		return this.http.delete(url);
 	}
 
 

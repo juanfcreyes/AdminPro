@@ -9,6 +9,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { LoginGuard } from '../services/guards/login.guard';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const ROUTES: Routes = [
   { 
@@ -23,6 +24,7 @@ const ROUTES: Routes = [
       { path:'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard'}  }, 
       { path:'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajuste de tema'}  }, 
       { path:'profile', component: ProfileComponent, data: { titulo: 'Perfil de usuario'}  }, 
+      { path:'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuarios'}},
       { path:'', redirectTo: '/dashboard' , pathMatch: 'full' }, 
     ]
   } 
