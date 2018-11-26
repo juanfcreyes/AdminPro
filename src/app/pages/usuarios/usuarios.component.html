@@ -2,7 +2,7 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-body">
-				<input #termino (keyup)="buscarUsuarios(termino.value)" type="text" class="form-control" placeholder="Buscar usuario..." />
+				<input [(ngModel)]="termino" (keyup)="buscarUsuarios()" type="text" class="form-control" placeholder="Buscar usuario..." />
 			</div>
 		</div>
 	</div>

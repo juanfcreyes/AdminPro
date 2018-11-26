@@ -16,21 +16,23 @@ export class UsuariosComponent implements OnInit {
 	private desde: number = 0;
 	private totalRegistros: number = 0;
 	private cargando: Boolean = true;
+	private termino: string = '';
 
 	constructor(private usuarioService: UsuarioService,
 		private modalUploadService: ModalUploadService) { }
 
 	ngOnInit() {
-		this.cargarUsuarios();
+		this.cargarUsuarios(false);
 		this.modalUploadService.notificacion.subscribe(() => {
-			this.cargarUsuarios();
+			this.cargarUsuarios(true);
 		});
 	}
 
 	/**
 	 * Funcion para cargar los usuarios por defecto
 	 */
-	private cargarUsuarios() {
+	private cargarUsuarios(cambioPagina) {
+		this.desde = cambioPagina ? this.desde : 0;
 		this.cargando = true;
 		this.usuarioService.cargarUsuarios(this.desde).subscribe((res : any) => {
 			this.totalRegistros = res.total;
@@ -49,22 +51,34 @@ export class UsuariosComponent implements OnInit {
 			return;
 		}
 		this.desde = desde;
-		this.cargarUsuarios();
+		this.consultarUsuarios();
+	}
 
+	/**
+	 * Determina si realiza una couslta de usurio por filtro o sin el
+	 */
+	private consultarUsuarios() {
+		if (this.termino.length <= 0) {
+			this.cargarUsuarios(true);
+		} else {
+			this.buscarUsuarios(true);
+		}
 	}
 	
 	/**
 	 * Busca usuario por un termino de busqueda
 	 * @param termino 
 	 */
-	private buscarUsuarios(termino: string) {
-		if(termino.length <= 0) {
-			this.cargarUsuarios();
+	private buscarUsuarios(cambioPagina) {
+		if (this.termino.length <= 0) {
+			this.cargarUsuarios(cambioPagina);
 			return;
 		}
+		this.desde = cambioPagina ? this.desde : 0;
 		this.cargando = true;
-		this.usuarioService.buscarUsuarios(termino).subscribe((res:any)=> {
+		this.usuarioService.buscarUsuarios(this.termino, true, this.desde).subscribe((res:any)=> {
 			this.usuarios = res.usuarios;
+			this.totalRegistros = res.total;
 			this.cargando = false;
 		});
 	}
@@ -89,7 +103,7 @@ export class UsuariosComponent implements OnInit {
 				this.usuarioService.borrarUsuario(usuario._id)
 				.subscribe(()=> {
 					swal('Usuario Borrado', 'El usuario ha sido borrado correctamente', 'success');
-					this.cargarUsuarios();
+					this.cargarUsuarios(true);
 				});
 			}
 		});

@@ -157,8 +157,11 @@ export class UsuarioService {
 	 * Servicio para buscar usaurio mediante un termino de busqueda
 	 * @param termino 
 	 */
-	public buscarUsuarios(termino: string) {
-		const url = `${URL_SERVICIOS}/busqueda/coleccion/usuarios/${termino}`;
+	public buscarUsuarios(termino: string, paginar: boolean = false, desde: number = 0 ) {
+		let url = `${URL_SERVICIOS}/busqueda/coleccion/usuarios/${termino}`;
+		if (paginar) {
+			url += `?paginar=${paginar}&desde=${desde}`
+		}
 		return this.http.get(url);
 	}
 
