@@ -18,10 +18,8 @@ export class SubirArchivoService {
                 if (xhr.readyState === 4) {
                     if( xhr.status === 200) {
                         resolve(JSON.parse(xhr.response))
-                        console.log('Imagen subida');
                     } else {
                         reject(xhr.response)
-                        console.log('Fallo la subida');
                     }
                 }  
             };

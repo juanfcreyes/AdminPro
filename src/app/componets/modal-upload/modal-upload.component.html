@@ -10,13 +10,13 @@
 				</div>
 				<div class="modal-body">
 					<div class="row justify-content-center" *ngIf="!imagenTemp">
-						<img [src]="img | imagen" class="w150">
+						<img [src]="img | imagen:tipo" class="w150">
 					</div>
 					<div class="row justify-content-center" *ngIf="imagenTemp">
 						<img [src]="imagenTemp" class="w150">
 					</div>
 					<div class="row justify-content-center">
-							<input class="form-control" name="imagen" (change)="selecionarImagen($event.target.files[0])" type="file" />
+						<input id="imagen" class="form-control" name="imagen" (change)="selecionarImagen($event.target.files[0])" type="file" />
 					</div>
 				</div>
 				<div class="modal-footer">

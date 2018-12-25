@@ -29,6 +29,13 @@ export class UsuarioService {
 		return this.usuario;	
 	}
 
+	/**
+	 * getToken
+	 */
+	public getToken(): string {
+		return this.token;
+	}
+
 
 	/**
 	 * Guarda los datos del usuario en el localstorage
@@ -116,14 +123,14 @@ export class UsuarioService {
 	 * Servicio para actualizar datos del usuario
 	 * @param usuario 
 	 */
-	public actualizarUsuario(usuario: Usuario) {
-		const url = `${URL_SERVICIOS}/usuario/${usuario._id}?token=${this.token}`;
-		return this.http.put(url, usuario).pipe(map((res: any) => {
-			if (usuario._id === this.usuario._id) {
-				const {usuarioDb} = res;
-				this.guardarStorage(usuarioDb._id, this.token, usuario);
+	public actualizarUsuario(usuarioWeb: Usuario) {
+		const url = `${URL_SERVICIOS}/usuario/${usuarioWeb._id}?token=${this.token}`;
+		return this.http.put(url, usuarioWeb).pipe(map((res: any) => {
+			if (usuarioWeb._id === this.usuario._id) {
+				const {usuario} = res;
+				this.guardarStorage(usuario._id, this.token, usuario);
 			}
-			swal('Usuario actualizado', usuario.nombre, 'success');
+			swal('Usuario actualizado', usuarioWeb.nombre, 'success');
 			return true;
 		}));
 	}

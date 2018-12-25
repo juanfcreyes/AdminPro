@@ -12,11 +12,11 @@ declare var swal:any;
 })
 export class UsuariosComponent implements OnInit {
 
-	private usuarios: Usuario[] = [];
-	private desde: number = 0;
-	private totalRegistros: number = 0;
-	private cargando: Boolean = true;
-	private termino: string = '';
+	usuarios: Usuario[] = [];
+	desde: number = 0;
+	totalRegistros: number = 0;
+	cargando: Boolean = true;
+	termino: string = '';
 
 	constructor(private usuarioService: UsuarioService,
 		private modalUploadService: ModalUploadService) { }
@@ -31,7 +31,7 @@ export class UsuariosComponent implements OnInit {
 	/**
 	 * Funcion para cargar los usuarios por defecto
 	 */
-	private cargarUsuarios(cambioPagina) {
+	cargarUsuarios(cambioPagina) {
 		this.desde = cambioPagina ? this.desde : 0;
 		this.cargando = true;
 		this.usuarioService.cargarUsuarios(this.desde).subscribe((res : any) => {
@@ -45,7 +45,7 @@ export class UsuariosComponent implements OnInit {
 	 * Funcion para controlar el cambio de pagina
 	 * @param valor 
 	 */
-	private cambiarDesde(valor: number) {
+	cambiarDesde(valor: number) {
 		const desde = this.desde + valor;
 		if (desde >= this.totalRegistros || desde < 0) {
 			return;
@@ -57,7 +57,7 @@ export class UsuariosComponent implements OnInit {
 	/**
 	 * Determina si realiza una couslta de usurio por filtro o sin el
 	 */
-	private consultarUsuarios() {
+	consultarUsuarios() {
 		if (this.termino.length <= 0) {
 			this.cargarUsuarios(true);
 		} else {
@@ -69,7 +69,7 @@ export class UsuariosComponent implements OnInit {
 	 * Busca usuario por un termino de busqueda
 	 * @param termino 
 	 */
-	private buscarUsuarios(cambioPagina) {
+	buscarUsuarios(cambioPagina) {
 		if (this.termino.length <= 0) {
 			this.cargarUsuarios(cambioPagina);
 			return;
@@ -87,7 +87,7 @@ export class UsuariosComponent implements OnInit {
 	 * Borra a un usuario del sistema
 	 * @param usuario 
 	 */
-	private borrarUsuario(usuario: Usuario) {
+	borrarUsuario(usuario: Usuario) {
 		if (usuario._id === this.usuarioService.getUsuario()._id) {
 			swal('No puede borrar usuario', 'No se puede borrar así mismo', 'error');
 			return;
@@ -113,14 +113,14 @@ export class UsuariosComponent implements OnInit {
 	 * Actualiza la informacion de un usuario 
 	 * @param usuario 
 	 */
-	private guardarUsuario(usuario: Usuario) {
+	guardarUsuario(usuario: Usuario) {
 		this.usuarioService.actualizarUsuario(usuario).subscribe();
 	}
 
 	/**
 	 * Muesta el modal para editar imagen
 	 */
-	private mostrarModal(usaurio: Usuario) {
+	mostrarModal(usaurio: Usuario) {
 		this.modalUploadService.mostrarModal('usuarios', usaurio._id);
 	}
 

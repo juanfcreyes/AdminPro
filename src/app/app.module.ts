@@ -15,7 +15,7 @@ import { UtilitarioModule } from './utilitario/utilitario.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

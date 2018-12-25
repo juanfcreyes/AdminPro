@@ -9,8 +9,8 @@ import { ModalUploadService, ImagenService } from 'src/app/utilitario/utilitario
 })
 export class ModalUploadComponent implements OnInit {
 
-	private imagenTemp: string;
-	private imagen: File;
+	imagenTemp: string;
+	imagen: File;
 
 	constructor(private subirArchivoService: SubirArchivoService,
 		private modalUploadService: ModalUploadService, 
@@ -23,17 +23,18 @@ export class ModalUploadComponent implements OnInit {
 	/**
 	 * Funcion para cerrar el modal
 	 */
-	private cerrarModal() {
+	cerrarModal() {
 		this.imagen = undefined;
 		this.imagenTemp = undefined;
 		this.modalUploadService.ocultarModal();
+		(<HTMLInputElement>document.getElementById('imagen')).value = '';
 	}
 
 	/**
 	 * Funcion para seleccionar el modal
 	 * @param archivo 
 	 */
-	private selecionarImagen(archivo: File) {
+	selecionarImagen(archivo: File) {
 		this.imagen = this.imagenService.selecionarImagen(archivo);
 		this.imagenService.crearImagenTemporal(archivo)
 		.then( res => {
@@ -41,7 +42,7 @@ export class ModalUploadComponent implements OnInit {
 		});;
 	}
 
-	private subirImagen() {
+	subirImagen() {
 		this.subirArchivoService.subirArchivo(this.imagen, 
 			this.modalUploadService.tipo, 
 			this.modalUploadService.id).then((res) => {

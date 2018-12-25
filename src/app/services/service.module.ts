@@ -4,9 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { SettingsService,
         SidebarService,
         SharedService,
-        UsuarioService, 
+        UsuarioService,
+        MedicoService, 
+        HospitalService,
         SubirArchivoService } from './service.index';
 import { LoginGuard } from './guards/login.guard';
+
 
 
 
@@ -21,6 +24,8 @@ import { LoginGuard } from './guards/login.guard';
     SharedService,
     UsuarioService,
     SubirArchivoService,
+    MedicoService,
+    HospitalService,
     LoginGuard
   ],
   declarations: []

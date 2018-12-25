@@ -1,0 +1,70 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <div class="text-right">
+                  <button class="btn btn-primary" [routerLink]="['/medico', 'nuevo']"><li class="fa fa-plus"></li> Crear Médico</button>
+              </div>
+              <br>
+              <input [(ngModel)]="termino" (keyup)="buscarMedico()" type="text" class="form-control" placeholder="Buscar Medico..." />
+          </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="cargando" class="row animated fadeIn">
+    <div class="col-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando...</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <samp>Espere por favor</samp>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!cargando" class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title"> Médicos registrados (<small>{{totalRegistros}}</small>) </h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Hospital</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let medico of medicos">
+                            <td class="w70">
+                                <img (click)="mostrarModal(medico)" [src]="medico.img | imagen:'medicos' " class="w50 img-circle pointer">
+                            </td>
+                            <td>
+                                {{ medico.nombre }}
+                            </td>
+                            <td>
+                                {{ medico.hospital.nombre }}
+                            </td>
+                            <td>
+                                <button [routerLink]="['/medico', medico._id]" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                </button>
+                                <button (click)="borrarMedico(medico)" class="btn btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn btn-secondary" (click)="cambiarDesde(-5)">Anteriores</button>
+                <button class="btn btn-secondary" (click)="cambiarDesde(5)">Siguientes</button>
+
+            </div>
+        </div>
+    </div>
+</div>
