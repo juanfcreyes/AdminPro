@@ -16,6 +16,7 @@ export class SiderbarComponent implements OnInit {
 
 	ngOnInit() {
 		this.usuario = this.usuarioService.getUsuario();
+		this.siderbarService.cargarMenu();
 	}
 
 	logout() {
