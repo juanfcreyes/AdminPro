@@ -7,7 +7,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 export class SidebarService {
 
 	public menu: any = null;
-	constructor(private usuarioService: UsuarioService) {
+	constructor(public usuarioService: UsuarioService) {
 		
 	}
 

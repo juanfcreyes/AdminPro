@@ -10,12 +10,12 @@ import { ImagenService } from 'src/app/utilitario/utilitario.index';
 })
 export class ProfileComponent implements OnInit {
 
-	private imagenTemp: string;
-	private usuario: Usuario;
-	private imagen: File ;
+	public imagenTemp: string;
+	public usuario: Usuario;
+	public imagen: File ;
 
-	constructor(private usuarioService: UsuarioService,
-		private imagenService: ImagenService) {
+	constructor(public usuarioService: UsuarioService,
+		public imagenService: ImagenService) {
 		this.usuario = this.usuarioService.getUsuario();
 	}
 

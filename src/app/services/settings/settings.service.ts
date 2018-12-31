@@ -5,13 +5,13 @@ import { DOCUMENT } from '@angular/platform-browser';
 })
 export class SettingsService {
   
-  private AJUSTES: string = 'ajustes';
-  private ajustes: Ajustes = {
+  public AJUSTES: string = 'ajustes';
+  public ajustes: Ajustes = {
     temaUrl: 'assets/css/colors/default.css',
     tema: 'default'
   }
   
-  constructor(@Inject(DOCUMENT) private _document) { 
+  constructor(@Inject(DOCUMENT) public _document) { 
     this.cargarAjustes();
   }
 

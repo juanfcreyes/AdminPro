@@ -8,8 +8,9 @@ import { SettingsService,
         MedicoService, 
         HospitalService,
         SubirArchivoService,
-        AdminGuard } from './service.index';
-import { LoginGuard } from './guards/login.guard';
+        LoginGuard,
+        AdminGuard, 
+        VerificaTokenGuard } from './service.index';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { LoginGuard } from './guards/login.guard';
     MedicoService,
     HospitalService,
     LoginGuard,
-    AdminGuard
+    AdminGuard,
+    VerificaTokenGuard
   ],
   declarations: []
 })

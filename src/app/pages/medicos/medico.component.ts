@@ -18,10 +18,10 @@ export class MedicoComponent implements OnInit {
 	medico: Medico = new Medico('','','','','');
 	
 
-	constructor(private hospitalService: HospitalService, 
-		private medicoService: MedicoService, 
-		private router:Router, activateddRoute: ActivatedRoute, 
-		private modalUploadService: ModalUploadService) { 
+	constructor(public hospitalService: HospitalService, 
+		public medicoService: MedicoService, 
+		public router:Router, activateddRoute: ActivatedRoute, 
+		public modalUploadService: ModalUploadService) { 
 
 			activateddRoute.params.subscribe( (params: any) => {
 				const id = params['id'];

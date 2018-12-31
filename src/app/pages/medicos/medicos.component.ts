@@ -16,7 +16,7 @@ export class MedicosComponent implements OnInit {
 	termino: string = '';
 	cargando: boolean = false;
 
-	constructor(private medicoService: MedicoService) { }
+	constructor(public medicoService: MedicoService) { }
 
 	ngOnInit() {
 		this.cargarMedicos();

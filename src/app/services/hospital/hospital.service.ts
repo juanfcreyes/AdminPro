@@ -10,12 +10,12 @@ import { Hospital } from 'src/app/models/hospital.model';
 })
 export class HospitalService {
 
-	private urlHospital = `${URL_SERVICIOS}/hospital`
+	public urlHospital = `${URL_SERVICIOS}/hospital`
 
-	constructor(private router:Router, private http: HttpClient,
-		private usuarioService: UsuarioService) { }
+	constructor(public router:Router, public http: HttpClient,
+		public usuarioService: UsuarioService) { }
 
-	private getToken() {
+	public getToken() {
 		return this.usuarioService.getToken();
 	}
 

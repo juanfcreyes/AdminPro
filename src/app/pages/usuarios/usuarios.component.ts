@@ -18,8 +18,8 @@ export class UsuariosComponent implements OnInit {
 	cargando: Boolean = true;
 	termino: string = '';
 
-	constructor(private usuarioService: UsuarioService,
-		private modalUploadService: ModalUploadService) { }
+	constructor(public usuarioService: UsuarioService,
+		public modalUploadService: ModalUploadService) { }
 
 	ngOnInit() {
 		this.cargarUsuarios(false);

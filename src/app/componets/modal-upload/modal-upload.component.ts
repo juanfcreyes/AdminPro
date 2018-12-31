@@ -12,9 +12,9 @@ export class ModalUploadComponent implements OnInit {
 	imagenTemp: string;
 	imagen: File;
 
-	constructor(private subirArchivoService: SubirArchivoService,
-		private modalUploadService: ModalUploadService, 
-		private imagenService: ImagenService) { }
+	constructor(public subirArchivoService: SubirArchivoService,
+		public modalUploadService: ModalUploadService, 
+		public imagenService: ImagenService) { }
 
 	ngOnInit() {
 		

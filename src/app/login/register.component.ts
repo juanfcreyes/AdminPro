@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
 	forma: FormGroup;
 
-	constructor(private usuarioService: UsuarioService, private router: Router) { 
+	constructor(public usuarioService: UsuarioService, public router: Router) { 
 
 	}
 

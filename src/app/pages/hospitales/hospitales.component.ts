@@ -18,8 +18,8 @@ export class HospitalesComponent implements OnInit {
     cargando: Boolean = false
     termino: string = '';
 
-    constructor(private hospitalService: HospitalService, 
-        private modalUploadService: ModalUploadService) { }
+    constructor(public hospitalService: HospitalService, 
+        public modalUploadService: ModalUploadService) { }
 
     ngOnInit() {
         this.cargarHospitales();

@@ -18,8 +18,8 @@ export class BusquedaComponent implements OnInit {
 	medicos: Medico[] = [];
 	
 
-	constructor(private activatedRoute: ActivatedRoute,
-		private http: HttpClient, private router: Router) {
+	constructor(public activatedRoute: ActivatedRoute,
+		public http: HttpClient, public router: Router) {
 		this.activatedRoute.params
 			.subscribe((params) => {
 				const termino = params['termino']

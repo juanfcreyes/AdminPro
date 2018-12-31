@@ -9,12 +9,12 @@ import { Medico } from 'src/app/models/medico.model';
 })
 export class MedicoService {
 
-	private urlHospital = `${URL_SERVICIOS}/medico`
+	public urlHospital = `${URL_SERVICIOS}/medico`
 
-	constructor(private http: HttpClient,
-		private usuarioService: UsuarioService) { }
+	constructor(public http: HttpClient,
+		public usuarioService: UsuarioService) { }
 
-	private getToken() {
+	public getToken() {
 		return this.usuarioService.getToken();
 	}
 

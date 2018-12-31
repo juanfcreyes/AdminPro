@@ -16,17 +16,17 @@ import { throwError } from 'rxjs';
 })
 export class UsuarioService {
 
-	private ID_FIELD = 'id';
-	private TOKEN_FIELD = 'token';
-	private USUARIO_FIELD = 'usuario';
-	private MENU_FIELD = 'menu';
+	public ID_FIELD = 'id';
+	public TOKEN_FIELD = 'token';
+	public USUARIO_FIELD = 'usuario';
+	public MENU_FIELD = 'menu';
 
-	private usuario: Usuario = null;
-	private token: string = '';
-	private menu: Object = null;
+	public usuario: Usuario = null;
+	public token: string = '';
+	public menu: Object = null;
 
-	constructor(private http: HttpClient, private router: Router,
-		private subirArchivoService: SubirArchivoService) {
+	constructor(public http: HttpClient, public router: Router,
+		public subirArchivoService: SubirArchivoService) {
 		this.cargarStorage();
 	}
 
@@ -59,19 +59,18 @@ export class UsuarioService {
 	 * @param token 
 	 * @param usuario 
 	 */
-	private guardarStorage(id: string, token: string, usuario: Usuario, menu: any) {
+	public guardarStorage(id: string, token: string, usuario: Usuario, menu: any) {
 		localStorage.setItem(this.ID_FIELD, id);
 		localStorage.setItem(this.TOKEN_FIELD, token);
 		localStorage.setItem(this.USUARIO_FIELD, JSON.stringify(usuario));
 		localStorage.setItem(this.MENU_FIELD, JSON.stringify(menu));
-		console.log(menu);
 		this.cargarStorage();
 	}
 
 	/**
 	 * Carga los datos del local storage
 	 */
-	private cargarStorage() {
+	public cargarStorage() {
 		if (localStorage.getItem(this.TOKEN_FIELD)) {
 			this.token = localStorage.getItem(this.TOKEN_FIELD);
 			this.usuario = JSON.parse(localStorage.getItem(this.USUARIO_FIELD));
@@ -115,7 +114,13 @@ export class UsuarioService {
 			this.guardarStorage(res.id, res.token, res.usuario, res.menu);
 			return true;
 		}), catchError((err: any) => {
-			swal('Error en el login', err.error.message, 'error');
+			let error;
+			if (!err.error.message) {
+				error= err.message
+			} else {
+				error = err.error.message
+			}
+			swal('Error en el login', error , 'error');
 			return throwError(err);
 		}));
 	}
@@ -210,5 +215,16 @@ export class UsuarioService {
 		return this.http.delete(url);
 	}
 
-
+	public renovarToken() {
+		const url = `${URL_SERVICIOS}/login/renuevatoken?token=${this.token}`;
+		return this.http.get(url).pipe(map((res: any) => {
+			this.token = res.token;
+			localStorage.setItem(this.TOKEN_FIELD, res.token);
+			return true
+		}), catchError((err: any) => {
+			this.logout();
+			swal('Sesión Expirada', 'Su sesión a expirado', 'error');
+			return throwError(err);
+		})); 
+	}
 }

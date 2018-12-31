@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
 	email: string;
 	auth2: any;
 
-	constructor(private router: Router,
-		 private usuarioService: UsuarioService,
-		 private zona: NgZone) { 
+	constructor(public router: Router,
+		 public usuarioService: UsuarioService,
+		 public zona: NgZone) { 
 		 }
 
 	ngOnInit() {
